@@ -1,0 +1,7 @@
+.card-image-for-products-card {
+  height: auto;
+  max-height: 250px;
+  width: auto;
+  max-width: 250px;
+  aspect-ratio: 1;
+}
