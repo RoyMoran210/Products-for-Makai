@@ -1,0 +1,61 @@
+USE [Makai]
+GO
+/****** Object:  StoredProcedure [dbo].[Products_Delete]    Script Date: 3/22/2023 6:29:42 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*
+=============================================
+AUTHOR: Roy Moran
+
+DATE CREATED: 23FEB2023
+
+DESCRIPTION: Insert proc (into product and product images)
+
+CODE REVIEWER:
+
+MODIFIED BY: author
+
+MODIFIED DATE:12/1/2020
+
+Code Reviewer:
+
+Note:
+=============================================
+*/
+ALTER proc [dbo].[Products_Delete]
+				@Id int
+
+
+AS
+
+/*
+
+Select * 
+From	dbo.Products as p
+inner join dbo.productImages as pi
+on pi.ProductId = p.Id
+
+Declare @Id int = 35;
+
+Execute dbo.Products_Delete 
+				@Id
+
+Select * 
+From	dbo.Products as p
+inner join dbo.productImages as pi
+on pi.ProductId = p.Id
+
+*/
+
+BEGIN
+
+DELETE FROM [dbo].[ProductImages]
+      WHERE ProductId = @Id
+
+DELETE FROM [dbo].[Products]
+      WHERE Id = @Id
+
+END
+
