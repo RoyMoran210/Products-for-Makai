@@ -1,0 +1,49 @@
+USE [Makai]
+GO
+/****** Object:  StoredProcedure [dbo].[ProductTypes_SelectAll]    Script Date: 3/22/2023 6:26:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*
+
+=============================================
+AUTHOR: Roy Moran
+
+DATE CREATED: 23FEB2023
+
+DESCRIPTION: Update proc for products.
+
+CODE REVIEWER:
+
+MODIFIED BY: author
+
+MODIFIED DATE:12/1/2020
+
+Code Reviewer:
+
+Note:
+=============================================
+
+*/
+
+
+ALTER PROC [dbo].[ProductTypes_SelectAll]
+
+AS
+
+/*
+
+Execute dbo.ProductTypes_SelectAll
+
+*/
+
+
+BEGIN
+
+		SELECT	[Id]
+				,[Name]
+		
+		FROM	[dbo].[ProductTypes]
+
+END
