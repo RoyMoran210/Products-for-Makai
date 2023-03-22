@@ -1,0 +1,128 @@
+USE [Makai]
+GO
+/****** Object:  StoredProcedure [dbo].[Products_Update]    Script Date: 3/22/2023 6:25:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*
+
+=============================================
+AUTHOR: Roy Moran
+
+DATE CREATED: 23FEB2023
+
+DESCRIPTION: Update proc for products.
+
+CODE REVIEWER:
+
+MODIFIED BY: author
+
+MODIFIED DATE:12/1/2020
+
+Code Reviewer:
+
+Note:
+=============================================
+
+*/
+
+
+ALTER proc	[dbo].[Products_Update]
+				@Name nvarchar(50)
+				,@ProductTypeId int
+				,@Description nvarchar(400)
+				,@StandId int
+				,@Identifier int
+				,@StatusType int
+				,@HourlyPriceInCents int
+				,@Position nvarchar(50)
+				,@CreatedBy int
+				,@ModifiedBy int
+				,@BatchImages dbo.BatchImages_V2 READONLY
+				,@Id int
+
+AS
+
+/*
+
+Declare @Id int = 33;
+
+Declare		@Name nvarchar(50) = 'UPDATEPRTEST'
+			,@ProductTypeId int = 2
+			,@Description nvarchar(400) = 'updateProcTestW/Batch'
+			,@StandId int = 2
+			,@Identifier int = 2
+			,@StatusType int = 2
+			,@HourlyPriceInCents int = 1999
+			,@Position nvarchar(50) = 'updateProcTest'
+			,@CreatedBy int = 12
+			,@ModifiedBy int = 12
+
+
+Declare		@BatchImages as dbo.[BatchImages_V2]
+
+INSERT INTO	@BatchImages (Id)
+Values		(34),(35),(36)
+
+
+Execute dbo.Products_Update
+			@Name
+			,@ProductTypeId
+			,@Description
+			,@StandId
+			,@Identifier
+			,@StatusType
+			,@HourlyPriceInCents
+			,@Position
+			,@CreatedBy
+			,@ModifiedBy
+			,@BatchImages
+			,@Id
+
+
+Select pi.productid, pi.fileid, f.createdby
+From dbo.ProductImages as pi
+LEFT OUTER JOIN dbo.Files as f on f.id = pi.fileid
+WHERE pi.productid = @Id
+
+Select * from dbo.Files
+
+Select *
+From dbo.Products as p
+inner join dbo.productImages as pi
+on p.id = pi.productid
+
+
+
+
+*/
+
+BEGIN
+	DECLARE @DateModified datetime2(7) = GETUTCDATE()
+
+	Delete dbo.ProductImages
+	Where ProductId = @Id
+
+	INSERT INTO dbo.ProductImages
+					([ProductId], [FileId])
+
+	SELECT		@Id
+				,bi.Id
+	FROM		@BatchImages as bi
+	
+
+	UPDATE	[dbo].[Products]
+	SET		[Name] = @Name
+			,[ProductTypeId] = @ProductTypeId
+			,[Description] = @Description
+			,[StandId] = @StandId
+			,[Identifier] = @Identifier
+			,[StatusType] = @StatusType
+			,[HourlyPriceInCents] = @HourlyPriceInCents
+			,[Position] = @Position
+			,[ModifiedBy] = @ModifiedBy
+			,[DateModified] = @DateModified
+	WHERE	Id = @Id 
+
+END
