@@ -1,0 +1,82 @@
+USE [Makai]
+GO
+/****** Object:  StoredProcedure [dbo].[Products_SelectAll_Paginated]    Script Date: 3/22/2023 6:24:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*
+=============================================
+AUTHOR: Roy Moran
+
+DATE CREATED: 23FEB2023
+
+DESCRIPTION: Paginated select all for products.
+
+CODE REVIEWER:
+
+MODIFIED BY: author
+
+MODIFIED DATE:12/1/2020
+
+Code Reviewer:
+
+Note:
+=============================================
+*/
+
+ALTER PROC [dbo].[Products_SelectAll_Paginated]
+									@PageIndex int
+									,@PageSize int
+
+AS
+
+/* ---------------- TEST CODE ----------------
+
+Declare @PageIndex int = 0
+		,@PageSize int = 5
+
+Execute dbo.[Products_SelectAll_Paginated]
+					@PageIndex 
+					,@PageSize 
+
+*/
+
+BEGIN
+
+DECLARE @Offset int =  @PageIndex * @PageSize
+
+SELECT p.[Id]
+	  ,p.[Name]
+	  ,p.[ProductTypeId]
+	  ,pt.[Name]
+      ,p.[Description]
+      ,p.[StandId]
+      ,p.[Identifier]
+      ,p.[StatusType]
+	  ,s.[Name]
+      ,p.[HourlyPriceInCents]
+      ,p.[Position]
+	  ,p.[CreatedBy]
+	  ,p.[ModifiedBy]
+	  ,pi.[FileId]
+	  ,f.[Url]
+      ,p.[DateCreated]
+      ,p.[DateModified]
+	  , TotalCount = Count(1) OVER()
+
+  FROM [dbo].[Products] as p 
+		inner join [dbo].[ProductTypes] as pt
+		on p.[ProductTypeId] = pt.[Id]
+		inner join [dbo].[StatusTypes] as s
+		on s.[Id] = p.[StatusType]
+		inner join dbo.ProductImages as pi
+		on pi.ProductId = p.Id
+		inner join dbo.files as f
+		on pi.FileId = f.Id
+
+ORDER BY Id
+OFFSET @Offset ROWS
+FETCH NEXT @PageSize ROWS ONLY;
+
+END
