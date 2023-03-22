@@ -1,0 +1,173 @@
+USE [Makai]
+GO
+/****** Object:  StoredProcedure [dbo].[Products_Insert]    Script Date: 3/22/2023 6:27:10 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+/*
+=============================================
+AUTHOR: Roy Moran
+
+DATE CREATED: 23FEB2023
+
+DESCRIPTION: Insert proc (into product and product images)
+
+CODE REVIEWER:
+
+MODIFIED BY: author
+
+MODIFIED DATE:12/1/2020
+
+Code Reviewer:
+
+Note:
+=============================================
+*/
+
+ALTER PROC	[dbo].[Products_Insert]
+			@Name nvarchar(50)
+			,@ProductTypeId int 
+			,@Description nvarchar(400)
+			,@StandId int
+			,@Identifier int
+			,@StatusType int
+			,@HourlyPriceInCents int
+			,@Position nvarchar(50)
+			,@CreatedBy int
+			,@ModifiedBy int
+			,@BatchImages dbo.[BatchImages_V2] READONLY
+			,@Id int OUTPUT
+
+
+
+AS
+
+/*
+
+
+Declare		@Id int = 0;
+Declare		@Name nvarchar(50) = 'SQL Test After 2 Qs'
+			,@ProductTypeId int = 1
+			,@Description nvarchar(400) = 'droptest'
+			,@StandId int = 1
+			,@Identifier int = 1
+			,@StatusType int = 1
+			,@HourlyPriceInCents int = 1999
+			,@Position nvarchar(50) = 'North'
+			,@CreatedBy int = 12
+			,@ModifiedBy int = 12
+
+
+Declare		@BatchImages as dbo.[BatchImages_V2]
+
+Insert Into	@BatchImages (Id)
+Values		(35),(36)
+
+Select *
+From @BatchImages
+
+Execute		[dbo].[Products_Insert]
+			@Name 
+			,@ProductTypeId 
+			,@Description 
+			,@StandId 
+			,@Identifier 
+			,@StatusType 
+			,@HourlyPriceInCents 
+			,@Position 
+			,@CreatedBy
+			,@ModifiedBy
+			,@BatchImages
+			,@Id OUTPUT
+
+SELECT		*
+FROM		dbo.Products as p
+INNER JOIN	dbo.ProductImages as pi
+ON			pi.ProductId = p.Id
+
+Select *
+From dbo.ProductImages
+
+*/
+BEGIN
+
+SET XACT_ABORT ON
+
+Declare @Tran nvarchar(50) = 'InsertProducts'
+BEGIN TRY
+
+BEGIN TRANSACTION @Tran
+
+	INSERT INTO [dbo].[Products]
+			   ([Name]
+			   ,[ProductTypeId]
+			   ,[Description]
+			   ,[StandId]
+			   ,[Identifier]
+			   ,[StatusType]
+			   ,[HourlyPriceInCents]
+			   ,[Position]
+			   ,[CreatedBy]
+			   ,[ModifiedBy])
+
+    
+	
+	VALUES	
+				(@Name
+				,@ProductTypeId
+				,@Description
+				,@StandId
+				,@Identifier
+				,@StatusType
+				,@HourlyPriceInCents
+				,@Position
+				,@CreatedBy
+				,@ModifiedBy)
+
+	SET			@Id = SCOPE_IDENTITY()
+
+	INSERT INTO dbo.ProductImages
+					([ProductId], [FileId])
+
+	SELECT		@Id
+				,bi.Id
+	FROM		@BatchImages as bi
+	WHERE		not exists
+				(
+					Select 1
+					From dbo.ProductImages as pi
+					where pi.ProductId = bi.Id 
+				)
+
+	COMMIT TRANSACTION @Tran
+END TRY
+
+BEGIN Catch
+
+
+	IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT 'The transaction is in an uncommittable state.' +
+              ' Rolling back transaction.'
+		ROLLBACK TRANSACTION @Tran;;
+    END;
+
+	IF (XACT_STATE()) = 1
+    BEGIN
+        PRINT 'The transaction is committable.' +
+              ' Committing transaction.'
+        COMMIT TRANSACTION @Tran;;
+    END;
+
+	SELECT ERROR_NUMBER()
+
+	THROW;
+
+END Catch
+
+SET XACT_ABORT OFF
+
+END
