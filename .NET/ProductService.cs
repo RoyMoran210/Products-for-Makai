@@ -1,15 +1,15 @@
-﻿using Sabio.Data;
-using Sabio.Data.Providers;
-using Sabio.Models;
-using Sabio.Models.Domain;
-using Sabio.Models.Domain.Products;
-using Sabio.Models.Requests.Products;
-using Sabio.Services.Interfaces;
+﻿using Makai.Data;
+using Makai.Data.Providers;
+using Makai.Models;
+using Makai.Models.Domain;
+using Makai.Models.Domain.Products;
+using Makai.Models.Requests.Products;
+using Makai.Services.Interfaces;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Sabio.Services
+namespace Makai.Services
 {
     public class ProductService : IProductService
     {
