@@ -3,18 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Sabio.Models;
-using Sabio.Models.Domain.Blogs;
-using Sabio.Models.Domain.Products;
-using Sabio.Models.Requests.Products;
-using Sabio.Services;
-using Sabio.Services.Interfaces;
-using Sabio.Web.Controllers;
-using Sabio.Web.Models.Responses;
+using Makai.Models;
+using Makai.Models.Domain.Blogs;
+using Makai.Models.Domain.Products;
+using Makai.Models.Requests.Products;
+using Makai.Services;
+using Makai.Services.Interfaces;
+using Makai.Web.Controllers;
+using Makai.Web.Models.Responses;
 using System;
 using System.Collections.Generic;
 
-namespace Sabio.Web.Api.Controllers
+namespace Makai.Web.Api.Controllers
 {
     [Route("api/products")]
     public class ProductApiController : BaseApiController
