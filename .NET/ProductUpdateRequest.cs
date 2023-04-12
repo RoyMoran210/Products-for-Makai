@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sabio.Models.Requests.Products
+namespace Makai.Models.Requests.Products
 {
     public class ProductUpdateRequest : ProductAddRequest, IModelIdentifier
     {
