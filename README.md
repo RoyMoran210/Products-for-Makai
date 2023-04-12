@@ -1,12 +1,9 @@
 # MakaiProject
 
 Makai Rentals introduces our innovative platform technology that powers an easier and more convenient water sports rental experience.
+By partnering with local entrepreneurs, our platform enables you to rent out high-quality equipment, while providing a vast network of options to choose from, all located close to your chosen water destination. Makai Rentals is an MVP and due to the proprietary nature of the code I can only provide code snippets of my code. This repository contains SQL, .NET, and React code.
 
-Our technology revolutionizes the way you reserve your desired water sports equipment, making it more accessible and hassle-free. By partnering with local entrepreneurs, our platform enables you to rent out high-quality equipment, while providing a vast network of options to choose from, all located close to your chosen water destination.
 
-Our intuitive interface makes it easy to book your equipment and pay for your rental online, providing a seamless and enjoyable experience. With Makai Rentals' platform, you can explore the outdoors and enjoy water sports without the added stress of equipment transportation, allowing you to make the most of your time on the water.
-
-We believe our platform technology offers a unique and valuable solution to the water sports rental industry. 
 
 As a Software Engineer for Makai Rentals, my responsibilites included: 
 
