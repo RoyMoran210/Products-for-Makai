@@ -23,4 +23,4 @@ As a Software Engineer for Makai Rentals, my responsibilites included:
 * Created new branches for organizational purposes, performed commits and pull requests to secure quality and consistency, and maintained workflow using GitBash and 
 and GitHub for repo management.
 
-*Participated in daily stand-ups, code reviews, and code talks with fellow developers to ensure cohesive teamwork and implemntation of code.
+* Participated in daily stand-ups, code reviews, and code talks with fellow developers to ensure cohesive teamwork and implemntation of code.
