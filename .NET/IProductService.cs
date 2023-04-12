@@ -1,9 +1,9 @@
-﻿using Sabio.Models;
-using Sabio.Models.Domain.Products;
-using Sabio.Models.Requests.Products;
+﻿using Makai.Models;
+using Makai.Models.Domain.Products;
+using Makai.Models.Requests.Products;
 using System.Collections.Generic;
 
-namespace Sabio.Services.Interfaces
+namespace Makai.Services.Interfaces
 {
     public interface IProductService
     {
