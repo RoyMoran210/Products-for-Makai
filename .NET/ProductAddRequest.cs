@@ -1,4 +1,4 @@
-﻿using Sabio.Models.Domain;
+﻿using Makai.Models.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sabio.Models.Requests.Products
+namespace Makai.Models.Requests.Products
 {
     public class ProductAddRequest
     {
