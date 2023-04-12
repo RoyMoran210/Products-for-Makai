@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sabio.Models.Domain.Products
+namespace Makai.Models.Domain.Products
 {
     public class Product
     {
